@@ -1,3 +1,6 @@
+#ifndef w25q32jv_h
+#define w25q32jv_h
+
 #include <Arduino.h>
 #include <SPI.h>
 
@@ -52,6 +55,9 @@ class Flash {
     void sectorErase(uint32_t address);
     void blockErase(uint32_t address, uint8_t cmd);
     void readData(uint32_t address, uint8_t *result, uint32_t size);
+    void readData(uint32_t address, uint16_t *result, uint32_t size) 
     void manufacturerDeviceId(uint8_t *result);
     void waitForFlash();
 };
+
+#endif

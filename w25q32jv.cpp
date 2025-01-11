@@ -379,6 +379,7 @@ void Flash::powerDown() {
  * release the device from the power-down state, or obtain the devices electronic identification (ID) number.
  */
 void Flash::releasePowerdown() {
+  uint8_t result[4];
   writeCommand(0xAB, result, 4);
 }
 

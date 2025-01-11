@@ -113,13 +113,7 @@ void Flash::writeDisable() {
   writeCommand(0x04);
 }
 
-/**
- * The Release from Power-down / Device ID instruction is a multi-purpose instruction. It can be used to
- * release the device from the power-down state, or obtain the devices electronic identification (ID) number.
- */
-void Flash::releasePowerdown(uint8_t *result) {
-  writeCommand(0xAB, result, 4);
-}
+
 
 /**
  * The Read Manufacturer/Device ID instruction is an alternative to the Release from Power-down / Device
@@ -381,6 +375,14 @@ void Flash::powerDown() {
 }
 
 /**
+ * The Release from Power-down / Device ID instruction is a multi-purpose instruction. It can be used to
+ * release the device from the power-down state, or obtain the devices electronic identification (ID) number.
+ */
+void Flash::releasePowerdown() {
+  writeCommand(0xAB, result, 4);
+}
+
+/**
  * Enable device reset
  */
 void Flash::enableReset() {
@@ -392,4 +394,13 @@ void Flash::enableReset() {
  */
 void Flash::resetDevice() {
   writeCommand(0x99);
+}
+
+/**
+ * Public convenience function to reset the chip. Enables reset and resets.
+ */
+void Flash::reset() {
+  enableReset();
+  delay(1);
+  resetDevice();
 }

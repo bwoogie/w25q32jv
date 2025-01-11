@@ -160,7 +160,7 @@ void Flash::readData(uint32_t address, uint16_t *result, uint32_t size) {
   digitalWrite(flashCSPin, LOW);
   writeAddress(0x03, address);
 
-  for (uint32_t i = 0; i < size; ++i) {
+  for (uint32_t i = 0; i < size; i+=2) {
     uint8_t highByte = SPI.transfer(0x00); // Read high byte
     uint8_t lowByte = SPI.transfer(0x00);  // Read low byte
     result[i] = (highByte << 8) | lowByte; // Combine into 16-bit
